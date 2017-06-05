@@ -9,6 +9,7 @@
 # Options -----------------------------------------------------------------
 
 # HELLO THIS IS REMI MESSING UP WITH YOUR SCRIPT
+# Hi this is Cindy and Mercedes
 options(stringsAsFactors=FALSE)
 library(Hmisc)
 library(sp)
