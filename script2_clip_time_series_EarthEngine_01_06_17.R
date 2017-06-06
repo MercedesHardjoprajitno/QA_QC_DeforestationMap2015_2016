@@ -59,8 +59,8 @@ dest_dir <-"A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_201
 
 ################# Create spatial point file 
 pt_df <- SpatialPointsDataFrame(
-  coords = pts@coords,
-  data   = data.frame(shp@data),
+  coords = pts[,c(xcoord,ycoord)],
+  data   = pts,
   proj4string=CRS("+init=epsg:4326")
 )
 
