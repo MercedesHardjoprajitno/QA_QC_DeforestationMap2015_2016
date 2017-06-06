@@ -48,19 +48,6 @@ ycoord   <- "YCoordinate"
 #### Name of the directory where your data will be stored in output
 dest_dir <-"A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc/Clip_Time_Series/"
 
-#### Read shapefile of plots
-## shp <- readOGR("A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc/shpfile_CE_2017-05-17.shp")###
-
-shp <- readOGR(dsn="A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc", layer="shpfile_CE_2017-05-17")
-
-names(shp)
-
-# #### Path to your file point and set the parameters
-map_code <- "Class"
-point_id <- "ID"
-xcoord   <- "xcoord"
-ycoord   <- "ycoord"
-
 # Preparation of files ----------------------------------------------------
 
 
@@ -68,8 +55,7 @@ ycoord   <- "ycoord"
 ################## SCRIPT AUTOMATICALLY RUNS FROM HERE
 ##########################################################################################################################################################################
 
-################## Read points from Design_App
-pts <- gCentroid(shp,byid=TRUE)
+
 
 ################# Create spatial point file 
 pt_df <- SpatialPointsDataFrame(
