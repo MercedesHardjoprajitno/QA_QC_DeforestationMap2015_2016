@@ -208,6 +208,9 @@ inbox<-SpatialPolygonsDataFrame(
 
 proj4string(inbox) <- proj4string(outbox) <- CRS("+init=epsg:4326")
 
+inbox <- spTransform(inbox,CRS("+init=epsg:32621"))
+outbox <- spTransform(outbox,CRS("+init=epsg:32621"))
+
 ################ Create the list of ID's to process
 list_ids <- pts[,point_id]
 
