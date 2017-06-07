@@ -235,7 +235,7 @@ head(pts)
 dev.off()
 
 ## The export image will be in a 4 (height) x 5 (width) grid box
-dim_v_grid <- 4
+dim_v_grid <- 1
 dim_h_grid <- 5
 
 for(the_id in listodo){
@@ -288,10 +288,10 @@ for(the_id in listodo){
       img <- brick(paste0(lsat_dir,"IMG_",year,"/",tile))
       img_clip <- crop(img,one_poly)
       
-      #swir <- raster(lsat_clip,4)
-      nir   <- raster(img_clip,3)
-      red   <- raster(img_clip,2)
-      green <- raster(img_clip,1)
+      swir <- raster(img_clip,1)
+      nir   <- raster(img_clip,2)
+      red   <- raster(img_clip,3)
+      #green <- raster(img_clip,1)
       ndvi  <- (nir-red)/(nir+red)
       #nbr  <- (nir-swir)/(nir+swir)
       
@@ -300,7 +300,7 @@ for(the_id in listodo){
       i <- i + 1
       
       #Plot natural colours composite (NIR-RED-GREEN == 4-3-2 in L7 nomenclature)
-      stack <- stack(nir,red,green)
+      stack <- stack(swir,nir,red)
       plotRGB(stack,stretch="hist",add=T)
     },error=function(e){cat(paste0("No available image for year",year))})
     
@@ -320,7 +320,7 @@ for(the_id in listodo){
     tile <- the_pt[,paste0("stnl_tile_",year)]
     
     tryCatch({
-      img <- brick(paste0(lsat_dir,"IMG_",year,"/",tile))
+      img <- brick(paste0(stnl_dir,"IMG_",year,"/",tile))
       img_clip <- crop(img,one_poly)
       
       #swir <- raster(lsat_clip,4)
