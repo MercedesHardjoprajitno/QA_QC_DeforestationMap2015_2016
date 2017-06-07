@@ -31,7 +31,7 @@ setwd("A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQ
 lsat_dir <- "A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc/Landsat/"
 
 #### Name of the directory where your Sentinel data is
-stnl_dir <- "A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc/Sentinel"
+stnl_dir <- "A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc/Sentinel/"
 
 
 pts <- read.csv("A:/WORK/WORKFOLDER/Deforestation_Monitoring/Deforestationmap2015_2016/QaQc/aa_design_output/pts_CE_2017-05-17.csv")  #####  CHANGE TO MY VALUE HERE
@@ -65,7 +65,7 @@ pt_df <- SpatialPointsDataFrame(
 )
 
 pt_df_geo <- spTransform(pt_df,CRS("+init=epsg:4326"))
-
+pt_df_utm <- spTransform(pt_df,CRS("+init=epsg:32621"))
 
 ################ Create the index of the Landsat tiles
 list_years_lsat <- substr(list.files(lsat_dir,pattern="IMG_"),5,8)
@@ -105,15 +105,15 @@ for(year in list_years_lsat){
   assign(paste0("idx_",year),year_idx)
   
   ################# Project both into Lat-Lon EPSG:4326
-  proj4string(pt_df_geo) <- proj4string(year_idx) <- CRS("+init=epsg:4326")
+  proj4string(pt_df_utm) <- proj4string(year_idx) <- CRS("+init=epsg:32621")
   
   ################# Intersect points with index of imagery and append ID's of imagery to data.frame
-  pts_year <- over(pt_df_geo,year_idx)
+  pts_year <- over(pt_df_utm,year_idx)
   pts      <- cbind(pts,pts_year)
 }
 
 
-################ Create the index of the Landsat tiles
+################ Create the index of the Sentinel tiles
 list_years_stnl <- substr(list.files(stnl_dir,pattern="IMG_"),5,8)
 lp<-list()
 
@@ -151,10 +151,10 @@ for(year in list_years_stnl){
   assign(paste0("idx_",year),year_idx)
   
   ################# Project both into Lat-Lon EPSG:4326
-  proj4string(pt_df_geo) <- proj4string(year_idx) <- CRS("+init=epsg:4326")
+  proj4string(pt_df_utm) <- proj4string(year_idx) <- CRS("+init=epsg:32621")
   
   ################# Intersect points with index of imagery and append ID's of imagery to data.frame
-  pts_year <- over(pt_df_geo,year_idx)
+  pts_year <- over(pt_df_utm,year_idx)
   pts      <- cbind(pts,pts_year)
 }
 
