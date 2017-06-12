@@ -104,7 +104,7 @@ for(year in list_years_lsat){
   plot(year_idx)
   assign(paste0("idx_",year),year_idx)
   
-  ################# Project both into Lat-Lon EPSG:4326
+  ################# Project both into Lat-Lon EPSG:43621
   proj4string(pt_df_utm) <- proj4string(year_idx) <- CRS("+init=epsg:32621")
   
   ################# Intersect points with index of imagery and append ID's of imagery to data.frame
@@ -238,7 +238,7 @@ dev.off()
 dim_v_grid <- 1
 dim_h_grid <- 5
 
-for(the_id in listodo){
+for(the_id in listodo[1]){
   
   ####################################################################
   ################# Open the image output file
