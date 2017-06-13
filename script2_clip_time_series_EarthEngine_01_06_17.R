@@ -235,8 +235,8 @@ head(pts)
 dev.off()
 
 ## The export image will be in a 4 (height) x 5 (width) grid box
-dim_v_grid <- 1
-dim_h_grid <- 5
+dim_v_grid <- 3
+dim_h_grid <- 3
 
 for(the_id in listodo[1]){
   
@@ -305,7 +305,7 @@ for(the_id in listodo[1]){
     },error=function(e){cat(paste0("No available image for year",year))})
     
     lines(in_poly,col="red",lwd=2)
-    title(main=paste("image_",year,sep=""),font.main=1200)
+    title(main=paste("landsat_",year,sep=""),font.main=1200)
     
   }
   
@@ -340,7 +340,7 @@ for(the_id in listodo[1]){
     },error=function(e){cat(paste0("No available image for year",year))})
     
     lines(in_poly,col="red",lwd=2)
-    title(main=paste("image_",year,sep=""),font.main=1200)
+    title(main=paste("sentinel_",year,sep=""),font.main=1200)
     
   }
   
